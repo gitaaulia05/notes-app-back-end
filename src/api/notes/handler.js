@@ -108,6 +108,7 @@ class NotesHandler {
       return response;
     }
   }
+  
 }
 
 module.exports = NotesHandler;
