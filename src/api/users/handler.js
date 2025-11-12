@@ -6,6 +6,7 @@ class UsersHandler {
     this._validator = validator;
     this.postUserHandler = this.postUserHandler.bind(this);
     this.getUserByIdHandler = this.getUserByIdHandler.bind(this);
+    this.getUsersByUsernameHandler = this.getUsersByUsernameHandler.bind(this);
   }
   async postUserHandler(request, h) {
     try {
@@ -26,7 +27,7 @@ class UsersHandler {
       response.code(201);
       return response;
     } catch (error) {
-        console.error(error)
+      console.error(error);
       if (error instanceof ClientError) {
         const response = h.response({
           status: 'fail',
@@ -70,6 +71,17 @@ class UsersHandler {
       response.code(500);
       return response;
     }
+  }
+
+  async getUsersByUsernameHandler(request, h) {
+    const { username = '' } = request.query;
+    const users = await this._service.getUsersByUsername(username);
+    return {
+      status: 'success',
+      data: {
+        users,
+      },
+    };
   }
 }
 

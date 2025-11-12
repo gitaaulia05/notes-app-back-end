@@ -22,6 +22,7 @@ const routes = (handler) => [
     options: {
       auth: 'notesapp_jwt',
     },
+   
   },
   {
     method: 'PUT',
